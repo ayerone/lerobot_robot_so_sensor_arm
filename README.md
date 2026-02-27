@@ -1,9 +1,11 @@
 # lerobot_robot_so_sensor_arm
 
+![force sensor in the bottom jaw of so-arm101](images/gripper_with_sensor.PNG)
+
 This project extends the standard lerobot SO-101 robot by adding a force sensor at the gripper, enabling force feedback for manipulation tasks. The force sensor is connected via a separate Arduino but is integrated into the robot's observation space, so the sensor reading will be taken into account (as an "observation") during policy training. The robot should be able to learn to use appropriate gripping force, which will protect both delicate objects and the gripper motor.
 
 ## Features
-- Subclasses the standard `SO101Follower` robot to add force sensing at the gripper.
+- Subclasses the standard `SO101Follower` robot to add force sensing at the gripper. This accomplishes integrating the force sensor with minimal new code.
 - Reads force data from an Arduino-based analog sensor via serial port.
 - Compatible with the `lerobot` ecosystem for teleoperation and dataset recording.
 
@@ -17,6 +19,7 @@ This project extends the standard lerobot SO-101 robot by adding a force sensor 
 Upload `force_sensor.ino` to your Arduino. It listens for serial commands:
 - `READ` — returns the current force sensor value
 - `STATUS` — returns `OK`
+
 **Note: pending TODO: add a wake-up message from the arduino to the computer**
 
 ## Installation
