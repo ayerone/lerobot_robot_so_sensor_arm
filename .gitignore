@@ -1,0 +1,12 @@
+*~
+record_dataset_sensor_test.sh
+teleoperate.sh
+lerobot_robot_so_sensor_arm/__pycache__/
+lerobot_robot_so_sensor_arm/arduino_tty_id.sh
+
+lerobot_robot_so_sensor_arm/__pycache__/
+lerobot_robot_so_sensor_arm/arduino_tty_id.sh
+lerobot_robot_so_sensor_arm.egg-info/
+pyproject.toml
+record_dataset_sensor_test.sh
+teleoperate.sh
