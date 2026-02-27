@@ -49,6 +49,7 @@ This observation should now have the 6 joint angles *plus* 1 sensor measurement.
 ## Command-line Teleoperation & Recording
 
 Then, use the lerobot python or command-line scripts like you would with the default SO-100/SO-101. 
+
 **Be sure to include sensor_port argument for the robot.**
 
 ## Note on Motivation
