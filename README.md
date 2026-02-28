@@ -1,4 +1,4 @@
-# lerobot_robot_so_sensor_arm
+# Add a force sensor to the so-arm100/101 gripper
 
 ![force sensor in the bottom jaw of so-arm101](images/gripper_with_sensor.PNG)
 
@@ -67,6 +67,7 @@ I plan to add a solid backing behind the sensor that attaches to the gripper's b
 
 ## HuggingFace
 Find my corresponding datasets and robots policies over on HuggingFace
+
 user: primordial-spork
 
 ## License
