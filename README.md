@@ -37,9 +37,10 @@ Example to test (see `examples/test_robot_connection.py`):
 ```python
 from lerobot_robot_so_sensor_arm import SOSensorArmConfig, SOSensorArm
 
-config = SOSensorArmConfig(port="/dev/YOUR_ROBOT_SERIAL_PORT", sensor_port="/dev/YOUR_SENSOR_SERIAL_PORT")
+# Note: consider reusing a robot id that you already have a calibration for
+config = SOSensorArmConfig(id="so_with_sensor", port="/dev/YOUR_ROBOT_SERIAL_PORT", sensor_port="/dev/YOUR_SENSOR_SERIAL_PORT")
 arm = SOSensorArm(config)
-arm.connect(calibrate=False)
+arm.connect() # will run calibration; provide argument calibration=False to skip if calib file exists
 obs = arm.get_observation()
 print(obs)
 ```

@@ -1,11 +1,10 @@
 
-from lerobot_robot_so_sensor_arm import SOSensorArmConfig
-from lerobot_robot_so_sensor_arm import SOSensorArm
+from lerobot_robot_so_sensor_arm import SOSensorArmConfig, SOSensorArm
 
 so_follower_port = "/dev/YOUR_ROBOT_SERIAL_PORT" # example: "/dev/ttyACM0"
 force_sensor_port = "/dev/YOUR_SENSOR_SERIAL_PORT" # example: "/dev/ttyACM2"
 
-# optional: reuse a robot id that you already have a calibration for
+# Note: Consider reusing a robot id that you already have a calibration for
 config = SOSensorArmConfig(id="so_with_sensor", port=so_follower_port, sensor_port=force_sensor_port)
 arm = SOSensorArm(config)
 
