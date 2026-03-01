@@ -2,7 +2,7 @@
 
 ![force sensor in the bottom jaw of so-arm101](images/gripper_with_sensor.PNG)
 
-This project extends the standard lerobot SO-101 robot by adding a force sensor at the gripper, enabling force feedback for manipulation tasks. The force sensor is connected via a separate Arduino but is integrated into the robot's observation space, so the sensor reading will be taken into account (as an "observation") during policy training. The robot should be able to learn to use appropriate gripping force, which will protect both delicate objects and the gripper motor.
+This project extends the standard lerobot SO-101 robot by adding a force sensor at the gripper, enabling force feedback for manipulation tasks. The force sensor is connected via a separate Arduino but is integrated into the robot's observation space, so the sensor reading will be taken into account (as an "observation") during policy training. 
 
 ## Features
 - Subclasses the standard `SO101Follower` robot. This accomplishes integrating the force sensor with minimal new code.
@@ -53,13 +53,15 @@ Then, use the lerobot python or command-line scripts like you would with the def
 
 **Be sure to include sensor_port argument for the robot.**
 
-## Note on Motivation
+## Motivation
 
 I had wondered how lerobot/so-arm/so-100/so-101 deal with excessive gripper force.  When recording training examples, delicate gripping leads to dropped objects during inference. This creates a motive to grip objects more firmly during training, but with rigid objects this results in the gripper servo stalled in a high current condition as the Proportional control tries to reduce position error. Granted, the so-arm has lower limits set on the current for the gripper motor (as of early 2026 at least), but I did see reports of burned out gripper servos, presumably due to over-exertion, as in: https://huggingface.co/blog/sherryxychen/train-act-on-so-101
 
 Ultimately, I plan to modify the dataset recording script to take the gripper force into account, and to not update to tighter gripper actions as long as this force is above a certain threshold. The "action" itself will be modified (clamped to the last value before gripping force exceeded the threshold), so that the training dataset will contain actions for the gripper that correspond to the correct amount of force, even if the teleoperator has closed the gripper further during training.
 
-## Note on Sensor
+~~The robot should be able to learn to use appropriate gripping force, which will protect both delicate objects and the gripper motor.~~ This thought neglected to take into account the "C" in ACT (Action Chunking with Transformers), the policy I'm using, meaning that the ~1 second of pre-planned actions in a chunk can't take into account *future* gripping force.  I am still curious to see what effects having the force sensor in the system will have on gripping delicate objects, but it might turn out that successfully gripping fragile objects requires limiting the gripper actions (based on force measurements) at inference time.
+
+## Note on the Sensor
 
 It seems that with this sensor the measurement results mainly from deformations of the sensor plane; it responds more to regions of it being pressed than to, for example, a large flat object being pressed straight down across its entire surface of the sensor. I am interested to see in experiments whether this causes any issues with properly sensing gripping force on the large (compared to the sensor), flat face of an object.
 

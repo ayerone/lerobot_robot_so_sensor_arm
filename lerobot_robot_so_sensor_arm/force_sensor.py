@@ -5,7 +5,9 @@ from time import sleep
 
 logger = logging.getLogger(__name__)
 
-class ForceSensor():    
+class ForceSensor():
+    sensor_max: float = 1023
+
     def __init__(self, port: str):
         self.port = port
         self._connected = False
@@ -36,7 +38,8 @@ class ForceSensor():
             if self.serial.in_waiting > 0:
                 break
         reading = self.serial.readline().decode('utf-8').rstrip()
-        return int(reading)
+        scaled = int(reading)*100/self.sensor_max # scale to 0-100
+        return scaled
 
     def disconnect(self):
         self.serial.close()
