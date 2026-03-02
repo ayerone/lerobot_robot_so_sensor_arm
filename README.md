@@ -68,7 +68,7 @@ It seems that with this sensor the measurement results mainly from deformations 
 I plan to add a solid backing behind the sensor that attaches to the gripper's bottom jaw, and a felt or rubber pad onto the front of the sensor. Having some amount of deformable material in the gripper system should make it easier to moderate force during gripping.
 
 ## HuggingFace
-Find my corresponding datasets and robots policies over on HuggingFace
+Find my corresponding datasets and robot policies over on HuggingFace
 
 user: primordial-spork
 
