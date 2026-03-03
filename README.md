@@ -49,7 +49,7 @@ This observation should now have the 6 joint angles *plus* 1 sensor measurement.
 
 ## Command-line Teleoperation & Recording
 
-Then, use the lerobot python or command-line scripts like you would with the default SO-100/SO-101. 
+One of the cool things about leRobot is that once you have set up this new robot type, you can use all their python or command-line scripts like you would with the default SO-100/SO-101 (lerobot-teleoperate, lerobot-record, etc).
 
 **Be sure to include sensor_port argument for the robot.**
 
@@ -68,9 +68,24 @@ It seems that with this sensor the measurement results mainly from deformations 
 I plan to add a solid backing behind the sensor that attaches to the gripper's bottom jaw, and a felt or rubber pad onto the front of the sensor. Having some amount of deformable material in the gripper system should make it easier to moderate force during gripping.
 
 ## HuggingFace
-Find my corresponding datasets and robot policies over on HuggingFace
 
-user: primordial-spork
+This is a short recording using a modified lerobot-record script to limit robot gripping force while teleoperating:
+
+https://huggingface.co/datasets/primordial-spork/lerobot_test_force_sensor_limiting
+
+Modification to lerobot-record:
+```python
+act = teleop.get_action()  # Existing
+
+force = obs['sensor.force'] # Added
+if force > FORCE_THRESHOLD:
+  act['gripper.pos'] = max(
+    obs['gripper.pos'],
+    act['gripper.pos']
+  )
+```
+*Note that the max() operation [vs min] is because greater gripper.pos corresponds to a more open jaw.
+*I used a low force threshold of 20 (about 90 grams).
 
 ## License
 MIT
