@@ -25,7 +25,7 @@ Upload `force_sensor.ino` to your Arduino. It listens for serial commands:
 ## Installation
 This package requires Python 3.10+ and depends on `lerobot`:
 
-Clone this repo, cd, then (with your conda environment activated)
+Clone this repo, cd, then (with your lerobot conda environment activated)
 
 ```sh
 pip install -e .
